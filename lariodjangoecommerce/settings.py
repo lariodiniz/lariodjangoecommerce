@@ -22,7 +22,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# 
+
 SECRET_KEY = os.getenv('SECRET_KEY', '123')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'widget_tweaks',
     #aps
     'core',
+    'accounts',
     'catalogo',
+
 ]
 
 MIDDLEWARE = [
@@ -72,7 +74,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 #apps
-                'catalogo.context_processors.catefories'
+                'catalogo.context_processors.categories'
             ],
         },
     },
@@ -145,6 +147,16 @@ EMAIL_HOST = ''
 EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 DEFAULT_FROM_EMAIL = '' #Quem esta enviando o email
+
+# auth
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_URL = 'logout'
+AUTH_USER_MODEL = 'accounts.User'
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'accounts.backends.ModelBackend',
+)
 
 try:
     from .local_settings import *
